@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <Folder Include="Views\HR\" />
+    <Folder Include="Views\Management\" />
   </ItemGroup>
 
 </Project>

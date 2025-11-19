@@ -57,8 +57,6 @@ namespace PROG6212_POE.Controllers
             var existingUser = _context.Users.Find(user.UserId);
             if (existingUser == null) return NotFound();
 
-            // Update fields manually to avoid overwriting password if not changed (optional safety)
-            // For this assignment, we just update the whole entity
             existingUser.FullName = user.FullName;
             existingUser.Email = user.Email;
             existingUser.Role = user.Role;
@@ -94,7 +92,7 @@ namespace PROG6212_POE.Controllers
         {
             var claims = _context.Claims
                 .Where(c => c.Status == "Approved")
-                .ToList(); // Simple list for now
+                .ToList();
             return View(claims);
         }
     }

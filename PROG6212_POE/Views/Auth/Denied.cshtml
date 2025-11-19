@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "Access Denied";
+}
+
+<div class="container py-5 text-center">
+    <div class="display-1 text-danger mb-4">
+        <i class="bi bi-slash-circle"></i>
+    </div>
+    <h1 class="text-danger">Access Denied</h1>
+    <p class="lead text-muted">You do not have permission to view this page.</p>
+
+    <div class="mt-4">
+        @if (User.IsInRole("Lecturer"))
+        {
+            <a asp-controller="Dashboard" asp-action="Index" class="btn btn-primary">Go to Dashboard</a>
+        }
+        else if (User.IsInRole("ProgrammeCoordinator") || User.IsInRole("AcademicManager"))
+        {
+            <a asp-controller="Management" asp-action="ReviewClaims" class="btn btn-primary">Go to Reviews</a>
+        }
+        else if (User.IsInRole("HR"))
+        {
+            <a asp-controller="HR" asp-action="Index" class="btn btn-primary">Go to HR Panel</a>
+        }
+        else
+        {
+            <a asp-controller="Auth" asp-action="Login" class="btn btn-secondary">Back to Login</a>
+        }
+    </div>
+</div>

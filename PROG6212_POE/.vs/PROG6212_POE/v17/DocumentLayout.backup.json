@@ -3,28 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\Moegammad Yaaseen\\OneDrive\\Desktop\\Programming\\PROG6212_POE_Part3\\PROG6212_POE\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{AF2A63EA-E7A1-44BC-A1EC-465CF2385CCE}|PROG6212_POE.csproj|c:\\users\\moegammad yaaseen\\onedrive\\desktop\\programming\\prog6212_poe_part3\\prog6212_poe\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AF2A63EA-E7A1-44BC-A1EC-465CF2385CCE}|PROG6212_POE.csproj|solutionrelative:models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AF2A63EA-E7A1-44BC-A1EC-465CF2385CCE}|PROG6212_POE.csproj|c:\\users\\moegammad yaaseen\\onedrive\\desktop\\programming\\prog6212_poe_part3\\prog6212_poe\\views\\auth\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{AF2A63EA-E7A1-44BC-A1EC-465CF2385CCE}|PROG6212_POE.csproj|solutionrelative:views\\auth\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AF2A63EA-E7A1-44BC-A1EC-465CF2385CCE}|PROG6212_POE.csproj|c:\\users\\moegammad yaaseen\\onedrive\\desktop\\programming\\prog6212_poe_part3\\prog6212_poe\\models\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AF2A63EA-E7A1-44BC-A1EC-465CF2385CCE}|PROG6212_POE.csproj|solutionrelative:models\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AF2A63EA-E7A1-44BC-A1EC-465CF2385CCE}|PROG6212_POE.csproj|c:\\users\\moegammad yaaseen\\onedrive\\desktop\\programming\\prog6212_poe_part3\\prog6212_poe\\models\\filestorage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AF2A63EA-E7A1-44BC-A1EC-465CF2385CCE}|PROG6212_POE.csproj|solutionrelative:models\\filestorage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AF2A63EA-E7A1-44BC-A1EC-465CF2385CCE}|PROG6212_POE.csproj|c:\\users\\moegammad yaaseen\\onedrive\\desktop\\programming\\prog6212_poe_part3\\prog6212_poe\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AF2A63EA-E7A1-44BC-A1EC-465CF2385CCE}|PROG6212_POE.csproj|solutionrelative:models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AF2A63EA-E7A1-44BC-A1EC-465CF2385CCE}|PROG6212_POE.csproj|c:\\users\\moegammad yaaseen\\onedrive\\desktop\\programming\\prog6212_poe_part3\\prog6212_poe\\models\\claimmodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AF2A63EA-E7A1-44BC-A1EC-465CF2385CCE}|PROG6212_POE.csproj|solutionrelative:models\\claimmodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AF2A63EA-E7A1-44BC-A1EC-465CF2385CCE}|PROG6212_POE.csproj|c:\\users\\moegammad yaaseen\\onedrive\\desktop\\programming\\prog6212_poe_part3\\prog6212_poe\\models\\claim.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AF2A63EA-E7A1-44BC-A1EC-465CF2385CCE}|PROG6212_POE.csproj|solutionrelative:models\\claim.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AF2A63EA-E7A1-44BC-A1EC-465CF2385CCE}|PROG6212_POE.csproj|c:\\users\\moegammad yaaseen\\onedrive\\desktop\\programming\\prog6212_poe_part3\\prog6212_poe\\views\\auth\\denied.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{AF2A63EA-E7A1-44BC-A1EC-465CF2385CCE}|PROG6212_POE.csproj|solutionrelative:views\\auth\\denied.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -39,79 +23,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "User.cs",
-              "DocumentMoniker": "C:\\Users\\Moegammad Yaaseen\\OneDrive\\Desktop\\Programming\\PROG6212_POE_Part3\\PROG6212_POE\\Models\\User.cs",
-              "RelativeDocumentMoniker": "Models\\User.cs",
-              "ToolTip": "C:\\Users\\Moegammad Yaaseen\\OneDrive\\Desktop\\Programming\\PROG6212_POE_Part3\\PROG6212_POE\\Models\\User.cs",
-              "RelativeToolTip": "Models\\User.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-19T18:15:38.569Z",
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\Users\\Moegammad Yaaseen\\OneDrive\\Desktop\\Programming\\PROG6212_POE_Part3\\PROG6212_POE\\Views\\Auth\\Login.cshtml",
+              "RelativeDocumentMoniker": "Views\\Auth\\Login.cshtml",
+              "ToolTip": "C:\\Users\\Moegammad Yaaseen\\OneDrive\\Desktop\\Programming\\PROG6212_POE_Part3\\PROG6212_POE\\Views\\Auth\\Login.cshtml",
+              "RelativeToolTip": "Views\\Auth\\Login.cshtml",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAgwFkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-19T18:20:37.324Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "LoginViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\Moegammad Yaaseen\\OneDrive\\Desktop\\Programming\\PROG6212_POE_Part3\\PROG6212_POE\\Models\\LoginViewModel.cs",
-              "RelativeDocumentMoniker": "Models\\LoginViewModel.cs",
-              "ToolTip": "C:\\Users\\Moegammad Yaaseen\\OneDrive\\Desktop\\Programming\\PROG6212_POE_Part3\\PROG6212_POE\\Models\\LoginViewModel.cs",
-              "RelativeToolTip": "Models\\LoginViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-19T18:15:09.69Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "FileStorage.cs",
-              "DocumentMoniker": "C:\\Users\\Moegammad Yaaseen\\OneDrive\\Desktop\\Programming\\PROG6212_POE_Part3\\PROG6212_POE\\Models\\FileStorage.cs",
-              "RelativeDocumentMoniker": "Models\\FileStorage.cs",
-              "ToolTip": "C:\\Users\\Moegammad Yaaseen\\OneDrive\\Desktop\\Programming\\PROG6212_POE_Part3\\PROG6212_POE\\Models\\FileStorage.cs",
-              "RelativeToolTip": "Models\\FileStorage.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC4AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-19T18:14:53.769Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ErrorViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\Moegammad Yaaseen\\OneDrive\\Desktop\\Programming\\PROG6212_POE_Part3\\PROG6212_POE\\Models\\ErrorViewModel.cs",
-              "RelativeDocumentMoniker": "Models\\ErrorViewModel.cs",
-              "ToolTip": "C:\\Users\\Moegammad Yaaseen\\OneDrive\\Desktop\\Programming\\PROG6212_POE_Part3\\PROG6212_POE\\Models\\ErrorViewModel.cs",
-              "RelativeToolTip": "Models\\ErrorViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-19T18:14:42.479Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ClaimModels.cs",
-              "DocumentMoniker": "C:\\Users\\Moegammad Yaaseen\\OneDrive\\Desktop\\Programming\\PROG6212_POE_Part3\\PROG6212_POE\\Models\\ClaimModels.cs",
-              "RelativeDocumentMoniker": "Models\\ClaimModels.cs",
-              "ToolTip": "C:\\Users\\Moegammad Yaaseen\\OneDrive\\Desktop\\Programming\\PROG6212_POE_Part3\\PROG6212_POE\\Models\\ClaimModels.cs",
-              "RelativeToolTip": "Models\\ClaimModels.cs",
-              "ViewState": "AgIAAFIAAAAAAAAAAAAkwIEAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-19T18:14:03.68Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Claim.cs",
-              "DocumentMoniker": "C:\\Users\\Moegammad Yaaseen\\OneDrive\\Desktop\\Programming\\PROG6212_POE_Part3\\PROG6212_POE\\Models\\Claim.cs",
-              "RelativeDocumentMoniker": "Models\\Claim.cs",
-              "ToolTip": "C:\\Users\\Moegammad Yaaseen\\OneDrive\\Desktop\\Programming\\PROG6212_POE_Part3\\PROG6212_POE\\Models\\Claim.cs",
-              "RelativeToolTip": "Models\\Claim.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAALAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-19T18:11:15.51Z",
+              "Title": "Denied.cshtml",
+              "DocumentMoniker": "C:\\Users\\Moegammad Yaaseen\\OneDrive\\Desktop\\Programming\\PROG6212_POE_Part3\\PROG6212_POE\\Views\\Auth\\Denied.cshtml",
+              "RelativeDocumentMoniker": "Views\\Auth\\Denied.cshtml",
+              "ToolTip": "C:\\Users\\Moegammad Yaaseen\\OneDrive\\Desktop\\Programming\\PROG6212_POE_Part3\\PROG6212_POE\\Views\\Auth\\Denied.cshtml",
+              "RelativeToolTip": "Views\\Auth\\Denied.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-19T18:20:21.687Z",
               "EditorCaption": ""
             }
           ]

@@ -1,0 +1,59 @@
+﻿@model PROG6212_POE.Models.User
+@{
+    ViewData["Title"] = "Add User";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Add New User</h5>
+            </div>
+            <div class="card-body">
+                <form asp-action="Create" method="post">
+
+                    <div class="mb-3">
+                        <label class="form-label">Role</label>
+                        <select asp-for="Role" class="form-select" id="roleSelect">
+                            <option value="Lecturer">Lecturer</option>
+                            <option value="ProgrammeCoordinator">Programme Coordinator</option>
+                            <option value="AcademicManager">Academic Manager</option>
+                            <option value="HR">HR Admin</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Full Name</label>
+                        <input asp-for="FullName" class="form-control" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Username</label>
+                        <input asp-for="Username" class="form-control" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input asp-for="Password" class="form-control" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input asp-for="Email" type="email" class="form-control" />
+                    </div>
+
+                    <div class="mb-3" id="rateGroup">
+                        <label class="form-label fw-bold text-success">Hourly Rate (R)</label>
+                        <input asp-for="HourlyRate" class="form-control" value="0" />
+                        <div class="form-text">Set the approved rate for this lecturer.</div>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">Save User</button>
+                        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

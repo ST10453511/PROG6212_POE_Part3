@@ -1,0 +1,78 @@
+﻿@model IEnumerable<PROG6212_POE.Models.Claim>
+@{
+    ViewData["Title"] = "Payment Invoices";
+    decimal grandTotal = Model.Sum(c => c.TotalAmount);
+}
+
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4 no-print">
+        <h2><i class="bi bi-receipt me-2"></i>Approved Claims Invoice</h2>
+        <button onclick="window.print()" class="btn btn-success">
+            <i class="bi bi-printer me-2"></i>Print / Save as PDF
+        </button>
+    </div>
+
+    <div class="card shadow-sm mb-4 border-primary">
+        <div class="card-body bg-light">
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <h6 class="text-muted">Total Claims Approved</h6>
+                    <h3>@Model.Count()</h3>
+                </div>
+                <div class="col-md-4">
+                    <h6 class="text-muted">Total Payout Required</h6>
+                    <h3 class="text-success">R @grandTotal.ToString("N2")</h3>
+                </div>
+                <div class="col-md-4">
+                    <h6 class="text-muted">Date Generated</h6>
+                    <h3>@DateTime.Now.ToString("yyyy-MM-dd")</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header bg-dark text-white">
+            Payment Breakdown
+        </div>
+        <table class="table table-bordered mb-0">
+            <thead>
+                <tr>
+                    <th>Lecturer Name</th>
+                    <th>Claim ID</th>
+                    <th>Date Worked</th>
+                    <th>Hours</th>
+                    <th>Rate</th>
+                    <th class="text-end">Amount Payable</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var claim in Model)
+                {
+                    <tr>
+                        <td class="fw-bold">@claim.Lecturer?.FullName</td>
+                        <td><small class="text-muted">#@claim.ClaimId</small></td>
+                        <td>@claim.DateWorked.ToString("yyyy-MM-dd")</td>
+                        <td>@claim.HoursWorked</td>
+                        <td>R @claim.HourlyRate.ToString("N2")</td>
+                        <td class="text-end fw-bold">R @claim.TotalAmount.ToString("N2")</td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr class="bg-light fw-bold">
+                    <td colspan="5" class="text-end">GRAND TOTAL:</td>
+                    <td class="text-end text-success">R @grandTotal.ToString("N2")</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+<style>
+    @@media print {
+        .no-print { display: none !important; }
+        nav, footer { display: none !important; }
+        .card { border: 1px solid #ddd !important; }
+    }
+</style>

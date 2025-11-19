@@ -1,96 +1,148 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore; // Needed for database access
+using PROG6212_POE.Data;
 using PROG6212_POE.Models;
+using System;
 using System.Security.Claims;
 
 namespace PROG6212_POE.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Lecturer")]
     public class DashboardController : Controller
     {
-        private readonly IClaimStore _claimStore;
-        private readonly IFileStorage _files;
+        private readonly AppDbContext _context;
+        private readonly IFileStorage _fileStorage;
 
-        public DashboardController(IClaimStore store, IFileStorage files)
+        public DashboardController(AppDbContext context, IFileStorage fileStorage)
         {
-            _claimStore = store;
-            _files = files;
+            _context = context;
+            _fileStorage = fileStorage;
         }
 
-        // === DASHBOARD ===
+        // === DASHBOARD (List of Claims) ===
         public IActionResult Index()
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "";
-            var role = User.FindFirstValue(ClaimTypes.Role) ?? "";
-            if (role == "Lecturer")
-                ViewBag.RecentClaims = _claimStore.GetByUser(userId);
-            return View();
+            // Get the logged-in user's ID (which we stored as an Int in AuthController)
+            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            // Fetch claims from SQL Server
+            var claims = _context.Claims
+                .Where(c => c.LecturerId == userId)
+                .OrderByDescending(c => c.SubmittedAt)
+                .ToList();
+
+            return View(claims); // Reuse the "Index" view (formerly MyClaims)
         }
 
-        // === LECTURER: SUBMIT CLAIM ===
-        [Authorize(Roles = "Lecturer")]
+        // === SUBMIT CLAIM (GET) ===
         [HttpGet]
-        public IActionResult SubmitClaim() => View(new SubmitClaimViewModel());
-
-        [Authorize(Roles = "Lecturer")]
-        [HttpPost]
-        public async Task<IActionResult> SubmitClaim(SubmitClaimViewModel model)
+        public IActionResult SubmitClaim()
         {
-            if (!ModelState.IsValid) return View(model);
+            // 1. Get the logged-in lecturer's ID
+            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "";
-            var name = User.Identity?.Name ?? "Lecturer";
+            // 2. Fetch their profile to get the HourlyRate (Automation!)
+            var lecturer = _context.Users.Find(userId);
 
-            var claim = new ClaimDto
+            // 3. Pre-fill the form with their Rate
+            var model = new PROG6212_POE.Models.Claim
             {
-                UserId = userId,
-                LecturerName = name,
-                DateWorked = model.DateWorked,
-                HoursWorked = model.HoursWorked,
-                Activity = model.Activity,
-                HourlyRate = model.HourlyRate,
-                TotalAmount = model.TotalAmount,
-                Notes = model.Notes,
-                Status = ClaimStatus.Submitted
+                HourlyRate = lecturer?.HourlyRate ?? 0, // Pulls 500 from the DB
+                DateWorked = DateTime.Today,
+                HoursWorked = 0
             };
-            _claimStore.Add(claim);
 
-            if (model.Document != null)
+            // 4. Send this non-null model to the View
+            return View(model);
+        }
+
+        // === SUBMIT CLAIM (POST) ===
+        [HttpPost]
+        // clearly tell it to use YOUR Claim model, not the Security one
+        public async Task<IActionResult> SubmitClaim(PROG6212_POE.Models.Claim model, IFormFile? document)
+        {
+            // 1. Get Current User
+            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var lecturer = _context.Users.Find(userId);
+
+            // 2. AUTOMATION: Pull the Hourly Rate from the Database (Requirement)
+            // The lecturer cannot edit this; we ignore whatever they sent in the form for 'Rate'
+            model.HourlyRate = lecturer.HourlyRate;
+            model.LecturerId = userId;
+
+            // 3. AUTOMATION: Calculate Total
+            try
+            {
+                model.CalculateTotalAmount();
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+            }
+
+            // 4. VALIDATION: Business Rules
+            if (model.HoursWorked > 24)
+                ModelState.AddModelError("HoursWorked", "You cannot claim more than 24 hours in a day.");
+
+            if (model.HoursWorked > 100) // Simple monthly cap example
+                ModelState.AddModelError("HoursWorked", "This exceeds the monthly limit of 100 hours.");
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            // 5. Handle File Upload
+            if (document != null)
             {
                 try
                 {
-                    var doc = await _files.SaveAsync(model.Document);
-                    _claimStore.AddDocument(claim.ClaimId, doc);
+                    var fileData = await _fileStorage.SaveAsync(document);
+                    model.DocumentPath = fileData.RelativePath;
+                    model.DocumentName = fileData.FileName;
                 }
                 catch (Exception ex)
                 {
-                    TempData["Error"] = $"Upload failed: {ex.Message}";
+                    // If file upload fails, show error and stop
+                    TempData["Error"] = $"File upload failed: {ex.Message}";
+                    return View(model);
                 }
             }
 
-            TempData["Success"] = $"Claim submitted successfully (R{model.TotalAmount:N2}).";
-            return RedirectToAction("Index");
+            // 6. Save to SQL Database
+            _context.Claims.Add(model);
+            await _context.SaveChangesAsync();
+
+            TempData["Success"] = $"Claim submitted! Total: R{model.TotalAmount:N2}";
+            return RedirectToAction("MyClaims");
         }
 
-        // === LECTURER: MY CLAIMS LIST ===
-        [Authorize(Roles = "Lecturer")]
+        // === TRACKING API (For the Progress Bar) ===
+        [HttpGet]
+        public IActionResult GetClaimStatus()
+        {
+            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            var data = _context.Claims
+                .Where(c => c.LecturerId == userId)
+                .Select(c => new { id = c.ClaimId, status = c.Status })
+                .ToList();
+
+            return Json(data);
+        }
+
+        // === MY CLAIMS (The List View) ===
         public IActionResult MyClaims()
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "";
-            var claims = _claimStore.GetByUser(userId, 50);
-            return View(claims);
-        }
+            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-        // === NEW: JSON status feed for live updates ===
-        [Authorize(Roles = "Lecturer")]
-        [HttpGet]
-        public IActionResult MyClaimsStatusData()
-        {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "";
-            var data = _claimStore.GetByUser(userId, 50)
-                                  .Select(c => new { id = c.ClaimId, status = c.Status.ToString() });
-            return Json(data);
+            var claims = _context.Claims
+                .Where(c => c.LecturerId == userId)
+                .OrderByDescending(c => c.SubmittedAt)
+                .ToList();
+
+            return View(claims);
         }
     }
 }

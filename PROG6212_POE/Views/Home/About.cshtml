@@ -3,22 +3,48 @@
 }
 
 <div class="container py-5">
-    <h2 class="fw-bold mb-3 text-primary">About the Contract Monthly Claim System</h2>
-    <p class="lead text-muted mb-4">
-        The Contract Monthly Claim System (CMCS) is a secure digital platform that simplifies and automates
-        Independent Contractor claim submissions for academic institutions. It bridges the gap between
-        lecturers, coordinators, and managers, ensuring every claim is processed quickly and transparently.
-    </p>
+    <div class="row justify-content-center">
+        <div class="col-lg-8 text-center">
+            <h2 class="fw-bold mb-3 text-primary">About the Contract Monthly Claim System</h2>
+            <p class="lead text-muted mb-5">
+                The Contract Monthly Claim System (CMCS) is a secure digital platform that simplifies and automates
+                Independent Contractor claim submissions for academic institutions. It bridges the gap between
+                lecturers, coordinators, managers, and HR.
+            </p>
+        </div>
+    </div>
 
-    <ul class="list-group list-group-flush mb-4">
-        <li class="list-group-item">✔ Developed using ASP.NET Core MVC and C#</li>
-        <li class="list-group-item">✔ Secure authentication and role-based access control</li>
-        <li class="list-group-item">✔ Claim upload with file validation and encryption support</li>
-        <li class="list-group-item">✔ Progress tracking via lecturer dashboard</li>
-        <li class="list-group-item">✔ Approval workflows for coordinators and managers</li>
-    </ul>
+    <div class="card shadow border-0">
+        <div class="card-body p-4 p-md-5">
+            <h5 class="mb-4">Key Features</h5>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item border-0 ps-0">
+                    <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                    Developed using <strong>ASP.NET Core MVC</strong> and <strong>Entity Framework Core</strong>.
+                </li>
+                <li class="list-group-item border-0 ps-0">
+                    <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                    <strong>Secure Database:</strong> All user data and claims are stored in Microsoft SQL Server.
+                </li>
+                <li class="list-group-item border-0 ps-0">
+                    <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                    <strong>Automated Calculations:</strong> Lecturer claims are auto-calculated based on pre-set HR rates.
+                </li>
+                <li class="list-group-item border-0 ps-0">
+                    <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                    <strong>HR Management:</strong> Dedicated portal for managing users and generating payment invoices.
+                </li>
+                <li class="list-group-item border-0 ps-0">
+                    <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                    <strong>Approval Workflow:</strong> Multi-stage review process (Coordinator &rarr; Manager &rarr; HR).
+                </li>
+            </ul>
 
-    <a asp-controller="Auth" asp-action="Login" class="btn btn-primary btn-lg px-4">
-        Proceed to Login
-    </a>
+            <div class="mt-4">
+                <a asp-controller="Auth" asp-action="Login" class="btn btn-primary btn-lg px-4">
+                    Proceed to Login
+                </a>
+            </div>
+        </div>
+    </div>
 </div>

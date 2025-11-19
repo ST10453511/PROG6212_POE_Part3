@@ -28,8 +28,10 @@
 </section>
 
 <div class="container py-5">
+    <!-- Changed from col-md-4 to col-lg-3 so 4 fit in a row on large screens -->
     <div class="row g-4">
-        <div class="col-md-4">
+        <!-- 1. Lecturer -->
+        <div class="col-md-6 col-lg-3">
             <div class="card feature-card h-100">
                 <div class="card-body">
                     <div class="feature-icon mb-3"><i class="bi bi-journal-check"></i></div>
@@ -40,7 +42,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+
+        <!-- 2. Coordinator -->
+        <div class="col-md-6 col-lg-3">
             <div class="card feature-card h-100">
                 <div class="card-body">
                     <div class="feature-icon success mb-3"><i class="bi bi-clipboard-check"></i></div>
@@ -51,13 +55,28 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+
+        <!-- 3. Manager -->
+        <div class="col-md-6 col-lg-3">
             <div class="card feature-card h-100">
                 <div class="card-body">
                     <div class="feature-icon warning mb-3"><i class="bi bi-bar-chart-line"></i></div>
                     <h5 class="fw-semibold">Academic Managers</h5>
                     <p class="text-muted mb-0">
                         Academic Managers oversee the final stage of the approval process. They review all claims that have passed through Programme Coordinators to ensure they meet institutional and budgetary requirements. Managers have access to detailed analytics, including claim trends, staff workload summaries, and approval statistics. This supports data driven decision making and efficient allocation of institutional resources.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. HR/Admin -->
+        <div class="col-md-6 col-lg-3">
+            <div class="card feature-card h-100">
+                <div class="card-body">
+                    <div class="feature-icon warning mb-3"><i class="bi bi-people-fill"></i></div>
+                    <h5 class="fw-semibold">HR/Admin</h5>
+                    <p class="text-muted mb-0">
+                        Everything about managing users and money is handled in one place. HR takes care of making sure lecturer profiles are correct and up to date. They also set the approved hourly pay rates for each lecturer, which helps the system calculate payments automatically without mistakes. On top of that, they put together all the payment invoices in one bunch to make paying everyone on time a smooth and easy process.
                     </p>
                 </div>
             </div>

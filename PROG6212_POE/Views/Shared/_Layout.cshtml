@@ -34,23 +34,43 @@
                 <ul class="navbar-nav me-auto">
                     @if (User.Identity?.IsAuthenticated ?? false)
                     {
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
-                        </li>
-
-                        @* Show My Claims only to Lecturers *@
-                        @if (User.IsInRole("Lecturer"))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link" asp-controller="Dashboard" asp-action="MyClaims">My Claims</a>
-                            </li>
-                        }
-
-                        @* Review visible to ProgrammeCoordinator or AcademicManager *@
+                        // =================================================
+                        // 1. LOGIC FOR PROGRAMME COORDINATOR / MANAGER
+                        // =================================================
                         @if (User.IsInRole("ProgrammeCoordinator") || User.IsInRole("AcademicManager"))
                         {
                             <li class="nav-item">
+                                <a class="nav-link" asp-controller="Management" asp-action="Index">Dashboard</a>
+                            </li>
+
+                            <li class="nav-item">
                                 <a class="nav-link" asp-controller="Management" asp-action="ReviewClaims">Review</a>
+                            </li>
+                        }
+                        // =================================================
+                        // 2. LOGIC FOR HR
+                        // =================================================
+                        else if (User.IsInRole("HR"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="HR" asp-action="Index">User Management</a>
+                            </li>
+                        }
+                        // =================================================
+                        // 3. LOGIC FOR LECTURER
+                        // =================================================
+                        else if (User.IsInRole("Lecturer"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Dashboard" asp-action="SubmitClaim">Submit Claim</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Dashboard" asp-action="MyClaims">My Claims</a>
                             </li>
                         }
                     }

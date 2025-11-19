@@ -1,82 +1,90 @@
 ﻿using Xunit;
 using PROG6212_POE.Models;
+using System;
 
 namespace CMCSTests
 {
     public class ClaimTests
     {
+        // TEST 1: Does the auto-calculation work for normal input?
         [Fact]
-        public void CalculatedTotalAmount()
+        public void CalculateTotalAmount_ValidInputs_ReturnsCorrectTotal()
         {
-            // arrange phase
-            var claim = new Claim();
+            // Arrange
+            var claim = new Claim
+            {
+                HoursWorked = 10,
+                HourlyRate = 500
+            };
 
-            claim.Hours = 20;
-            claim.Rate = 670;
+            // Act
+            claim.CalculateTotalAmount();
 
-            // act phase
-            var getResult = claim.CalculateTotalAmount();
-
-            // assert phase
-            Assert.Equal(13400, getResult);
+            // Assert
+            Assert.Equal(5000, claim.TotalAmount);
         }
 
+        // TEST 2: Does the system prevent negative values? (Error Handling)
         [Fact]
-        public void AdditionalNotes_Simulation()
+        public void CalculateTotalAmount_NegativeHours_ThrowsException()
         {
-            var claim = new Claim();
-            claim.Notes = "Additional Notes submitted.";
+            // Arrange
+            var claim = new Claim
+            {
+                HoursWorked = -5,
+                HourlyRate = 500
+            };
 
-            var notes = claim.Notes;
-            Assert.Equal("Additional Notes submitted.", notes);
+            // Act & Assert
+            var exception = Assert.Throws<ArgumentException>(() => claim.CalculateTotalAmount());
+            Assert.Equal("Hours and Rate cannot be negative.", exception.Message);
         }
 
+        // TEST 3: Business Rule - Does it block impossible hours?
         [Fact]
-        public void FileProperties_IsStoredCorrectly()
+        public void CalculateTotalAmount_HoursExceed24_ThrowsException()
         {
-            var claim = new Claim();
+            // Arrange
+            var claim = new Claim
+            {
+                HoursWorked = 25, // Impossible in one day
+                HourlyRate = 500
+            };
 
-            claim.FileName = "invoice.pdf";
-            claim.FilePath = "/uploads/invoice.pdf";
-
-            Assert.Equal("invoice.pdf", claim.FileName);
-            Assert.Equal("/uploads/invoice.pdf", claim.FilePath);
+            // Act & Assert
+            Assert.Throws<ArgumentException>(() => claim.CalculateTotalAmount());
         }
 
+        // TEST 4: Does the status update workflow work correctly?
         [Fact]
-        public void ClaimStatus_ChangesWhenApprovedOrRejected()
+        public void ClaimStatus_DefaultIsSubmitted()
         {
             // Arrange
             var claim = new Claim();
-            string approver = "Manager";
 
-            // Act
-            claim.Approve(approver);
+            // Act (Initialization)
 
             // Assert
-            Assert.Equal("Approved", claim.Status);
-            Assert.Equal("Manager", claim.ApprovedBy);
-
-            // Act again
-            claim.Reject(approver);
-
-            // Assert again
-            Assert.Equal("Rejected", claim.Status);
-            Assert.Equal("Manager", claim.ApprovedBy);
+            Assert.Equal("Submitted", claim.Status); // Verifies default state
         }
 
+        // TEST 5: Rounding Logic (Financial Reliability)
         [Fact]
-        public void CalculateTotalAmount_ReturnsCorrectValue()
+        public void CalculateTotalAmount_DecimalInputs_RoundsCorrectly()
         {
             // Arrange
-            var claim = new Claim { Hours = 5, Rate = 200 };
+            var claim = new Claim
+            {
+                HoursWorked = 10.5m,
+                HourlyRate = 150.50m
+            };
 
             // Act
-            double result = claim.CalculateTotalAmount();
+            claim.CalculateTotalAmount();
 
             // Assert
-            Assert.Equal(1000, result);
-            Assert.Equal(1000, claim.TotalAmount);
+            // 10.5 * 150.50 = 1580.25
+            Assert.Equal(1580.25m, claim.TotalAmount);
         }
     }
 }

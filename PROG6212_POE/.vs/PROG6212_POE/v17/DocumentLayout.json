@@ -1,70 +1,12 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\Moegammad Yaaseen\\OneDrive\\Desktop\\Programming\\PROG6212_POE_Part3\\PROG6212_POE\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{AF2A63EA-E7A1-44BC-A1EC-465CF2385CCE}|PROG6212_POE.csproj|c:\\users\\moegammad yaaseen\\onedrive\\desktop\\programming\\prog6212_poe_part3\\prog6212_poe\\views\\auth\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{AF2A63EA-E7A1-44BC-A1EC-465CF2385CCE}|PROG6212_POE.csproj|solutionrelative:views\\auth\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AF2A63EA-E7A1-44BC-A1EC-465CF2385CCE}|PROG6212_POE.csproj|c:\\users\\moegammad yaaseen\\onedrive\\desktop\\programming\\prog6212_poe_part3\\prog6212_poe\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{AF2A63EA-E7A1-44BC-A1EC-465CF2385CCE}|PROG6212_POE.csproj|solutionrelative:views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AF2A63EA-E7A1-44BC-A1EC-465CF2385CCE}|PROG6212_POE.csproj|c:\\users\\moegammad yaaseen\\onedrive\\desktop\\programming\\prog6212_poe_part3\\prog6212_poe\\views\\home\\about.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{AF2A63EA-E7A1-44BC-A1EC-465CF2385CCE}|PROG6212_POE.csproj|solutionrelative:views\\home\\about.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 1,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": [
-        {
-          "DockedHeight": 200,
-          "SelectedChildIndex": 0,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Login.cshtml",
-              "DocumentMoniker": "C:\\Users\\Moegammad Yaaseen\\OneDrive\\Desktop\\Programming\\PROG6212_POE_Part3\\PROG6212_POE\\Views\\Auth\\Login.cshtml",
-              "RelativeDocumentMoniker": "Views\\Auth\\Login.cshtml",
-              "ToolTip": "C:\\Users\\Moegammad Yaaseen\\OneDrive\\Desktop\\Programming\\PROG6212_POE_Part3\\PROG6212_POE\\Views\\Auth\\Login.cshtml",
-              "RelativeToolTip": "Views\\Auth\\Login.cshtml",
-              "ViewState": "AgIAACIAAAAAAAAAAAAUwE0AAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-19T19:07:28.423Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "About.cshtml",
-              "DocumentMoniker": "C:\\Users\\Moegammad Yaaseen\\OneDrive\\Desktop\\Programming\\PROG6212_POE_Part3\\PROG6212_POE\\Views\\Home\\About.cshtml",
-              "RelativeDocumentMoniker": "Views\\Home\\About.cshtml",
-              "ToolTip": "C:\\Users\\Moegammad Yaaseen\\OneDrive\\Desktop\\Programming\\PROG6212_POE_Part3\\PROG6212_POE\\Views\\Home\\About.cshtml",
-              "RelativeToolTip": "Views\\Home\\About.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAcwDEAAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-19T18:46:06.836Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\Moegammad Yaaseen\\OneDrive\\Desktop\\Programming\\PROG6212_POE_Part3\\PROG6212_POE\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
-              "ToolTip": "C:\\Users\\Moegammad Yaaseen\\OneDrive\\Desktop\\Programming\\PROG6212_POE_Part3\\PROG6212_POE\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAEIAAAAAAAAAAAAUwFQAAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-19T18:45:22.354Z",
-              "EditorCaption": ""
-            }
-          ]
-        }
-      ]
+      "DocumentGroups": []
     }
   ]
 }

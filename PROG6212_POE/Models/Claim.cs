@@ -43,8 +43,15 @@ namespace PROG6212_POE.Models
 
         public void CalculateTotalAmount()
         {
+            // Rule 1: Basic Validity
+            // Tests expect 'ArgumentException' for negative values
             if (HoursWorked < 0 || HourlyRate < 0)
-                throw new InvalidOperationException("Hours and Rate must be positive values.");
+                throw new ArgumentException("Hours and Rate cannot be negative.");
+
+            // Rule 2: Business Logic Cap
+            // Tests expect an error if hours > 24 (impossible in one day)
+            if (HoursWorked > 24)
+                throw new ArgumentException("Cannot claim more than 24 hours in a day.");
 
             TotalAmount = HoursWorked * HourlyRate;
         }

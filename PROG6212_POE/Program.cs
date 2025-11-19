@@ -1,35 +1,44 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
+using PROG6212_POE.Data;
 using PROG6212_POE.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ===== Register MVC =====
+// 1. Add Database Context
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// 2. Add MVC
 builder.Services.AddControllersWithViews();
 
-// ===== Cookie Authentication =====
+// 3. Add Authentication (Cookie-based)
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(o =>
+    .AddCookie(options =>
     {
-        o.LoginPath = "/Auth/Login";
-        o.LogoutPath = "/Auth/Logout";
-        o.AccessDeniedPath = "/Auth/Denied";
-        o.SlidingExpiration = true;
-        o.ExpireTimeSpan = TimeSpan.FromHours(8);
+        options.LoginPath = "/Auth/Login";
+        options.LogoutPath = "/Auth/Logout";
+        options.AccessDeniedPath = "/Auth/Denied";
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+        options.SlidingExpiration = true;
     });
 
-builder.Services.AddAuthorization();
-
-// ===== Demo Data Stores =====
-builder.Services.AddSingleton<IUserStore, InMemoryUserStore>();
-
-// ===== Part 2 Services =====
-builder.Services.AddSingleton<IClaimStore, InMemoryClaimStore>();
-builder.Services.AddSingleton<IFileStorage, LocalFileStorage>();
-
-// ===== Build App =====
+// 4. Register Services
+builder.Services.AddScoped<IFileStorage, LocalFileStorage>();
 var app = builder.Build();
 
-// ===== Error Handling =====
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+
+    // 1. Create the Table Structure
+    db.Database.EnsureCreated();
+
+    // 2. Insert the Test Users
+    PROG6212_POE.Data.SeedData.Initialize(db);
+}
+
+// 6. Middleware Pipeline
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -40,23 +49,18 @@ else
     app.UseDeveloperExceptionPage();
 }
 
-// ===== Middleware =====
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
 app.UseRouting();
+
 app.UseAuthentication();
 app.UseAuthorization();
 
-/// ----------------------------------------------
-/// Auto-skip the Welcome Page for authenticated users.
-/// If a logged-in user hits "/" or "/Home/Index",
-/// redirect them directly to the Dashboard.
-/// ----------------------------------------------
+// Redirect root URL to Dashboard if logged in
 app.Use(async (context, next) =>
 {
-    var path = context.Request.Path.Value?.ToLowerInvariant();
-    if (context.User.Identity?.IsAuthenticated == true &&
-        (path == "/" || path == "/home" || path == "/home/index"))
+    if (context.Request.Path == "/" && (context.User.Identity?.IsAuthenticated ?? false))
     {
         context.Response.Redirect("/Dashboard/Index");
         return;
@@ -64,43 +68,8 @@ app.Use(async (context, next) =>
     await next();
 });
 
-
-// ===== Default Route (Welcome Page first) =====
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
-
-
-// ===== Demo Auth Types (Keep Below for Simplicity) =====
-public interface IUserStore
-{
-    DemoUser? Validate(string username, string password);
-}
-
-public class DemoUser
-{
-    public string UserId { get; set; } = default!;
-    public string Username { get; set; } = default!;
-    public string FullName { get; set; } = default!;
-    public string Role { get; set; } = default!;
-}
-
-public class InMemoryUserStore : IUserStore
-{
-    private static readonly List<DemoUser> Users = new()
-    {
-        new() { UserId = "U1", Username = "Lecturer", FullName = "Lecturer - Moegammad", Role = "Lecturer" },
-        new() { UserId = "U2", Username = "Programme Coordinator",        FullName = "Coordinator - Fazlin", Role = "ProgrammeCoordinator" },
-        new() { UserId = "U3", Username = "Academic Manager",        FullName = "Manager - Riyaaz", Role = "AcademicManager" },
-        new() { UserId = "admin", Username = "admin",   FullName = "System Admin", Role = "Admin" },
-    };
-
-    // Demo password logic: password == username
-    public DemoUser? Validate(string username, string password)
-    {
-        var u = Users.FirstOrDefault(x => x.Username.Equals(username, StringComparison.OrdinalIgnoreCase));
-        return (u != null && password == u.Username) ? u : null;
-    }
-}

@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <!-- Favicon / Brand Logo -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,
+    <svg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'>
+        <rect width='64' height='64' rx='12' fill='black' />
+        <text x='50%' y='55%' font-size='28' text-anchor='middle' fill='white' font-family='Segoe UI, sans-serif' font-weight='700'>C</text>
+    </svg>">
+
+    <title>@ViewData["Title"] - CMCS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm border-bottom border-secondary">
+        <div class="container">
+            <a class="navbar-brand fw-bold d-flex align-items-center" asp-controller="Dashboard" asp-action="Index">
+                <img src="data:image/svg+xml;utf8,
+                <svg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 64 64'>
+                    <rect width='64' height='64' rx='12' fill='white' />
+                    <text x='50%' y='55%' font-size='30' text-anchor='middle' fill='black' font-family='Segoe UI' font-weight='700'>C</text>
+                </svg>" alt="CMCS Logo" class="me-2" style="height:26px;">
+                CMCS
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navCMCS">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div id="navCMCS" class="collapse navbar-collapse">
+                <ul class="navbar-nav me-auto">
+                    @if (User.Identity?.IsAuthenticated ?? false)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
+                        </li>
+
+                        @* Show My Claims only to Lecturers *@
+                        @if (User.IsInRole("Lecturer"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Dashboard" asp-action="MyClaims">My Claims</a>
+                            </li>
+                        }
+
+                        @* Review visible to ProgrammeCoordinator or AcademicManager *@
+                        @if (User.IsInRole("ProgrammeCoordinator") || User.IsInRole("AcademicManager"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Management" asp-action="ReviewClaims">Review</a>
+                            </li>
+                        }
+                    }
+                </ul>
+                <div class="navbar-text text-white small me-3">
+                    @if (User.Identity?.IsAuthenticated ?? false)
+                    {
+                        <span class="me-2">@User.Identity?.Name</span>
+                        <span class="badge bg-light text-primary">@User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value</span>
+                    }
+                </div>
+                @if (User.Identity?.IsAuthenticated ?? false)
+                {
+                    <form asp-controller="Auth" asp-action="Logout" method="post" class="d-inline">
+                        <button class="btn btn-light btn-sm">Logout</button>
+                    </form>
+                }
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-4">
+        @RenderBody()
+    </main>
+
+    <footer class="border-top py-3 bg-white">
+        <div class="container small text-muted d-flex justify-content-between">
+            <span>CMCS • Contract Monthly Claim System</span>
+            <span>@DateTime.Now.ToString("yyyy")</span>
+
+        </div>
+    </footer>
+
+    <!-- Toasts -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        @if (TempData["Success"] is string s)
+        {
+            <div class="toast align-items-center text-bg-success border-0" id="toastSuccess">
+                <div class="d-flex">
+                    <div class="toast-body">@s</div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                </div>
+            </div>
+        }
+        @if (TempData["Error"] is string e)
+        {
+            <div class="toast align-items-center text-bg-danger border-0" id="toastError">
+                <div class="d-flex">
+                    <div class="toast-body">@e</div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                </div>
+            </div>
+        }
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // auto-show toasts
+        document.querySelectorAll('.toast').forEach(t => new bootstrap.Toast(t, { delay: 4000 }).show());
+    </script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
+

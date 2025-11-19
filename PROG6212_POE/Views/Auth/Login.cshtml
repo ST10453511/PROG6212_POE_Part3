@@ -1,0 +1,89 @@
+﻿@model PROG6212_POE.Models.LoginViewModel
+@{
+    ViewData["Title"] = "Sign in";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-xl-10">
+            <div class="login-shell row g-0">
+                <!-- Info panel -->
+                <div class="col-lg-5 p-4 p-md-5 login-info">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="login-badge me-2">CMCS</div>
+                        <div class="fw-semibold text-white-50">Contract Monthly Claim System</div>
+                    </div>
+
+                    <h2 class="text-white mb-3">Sign in</h2>
+                    <p class="text-white-50 mb-4">
+                        Secure sign in for your role. For the demo environment,
+                        <span class="text-white">password = username</span>.
+                    </p>
+
+                    <div class="d-flex flex-wrap gap-2 mb-4">
+                        <span class="role-chip">Lecturer</span>
+                        <span class="role-chip">Programme Coordinator</span>
+                        <span class="role-chip">Academic Manager</span>
+                    </div>
+
+                    <ul class="text-white-50 small list-unstyled mb-4">
+                        <li class="mb-2"><i class="bi bi-check-circle me-2"></i>Submit & track claims (Lecturer)</li>
+                        <li class="mb-2"><i class="bi bi-check-circle me-2"></i>Review & approve claims (Coordinator)</li>
+                        <li class="mb-2"><i class="bi bi-check-circle me-2"></i>Oversight & decisions (Manager)</li>
+                    </ul>
+
+                    <a asp-controller="Home" asp-action="About" class="link-light small text-decoration-none">
+                        Learn more about CMCS <i class="bi bi-arrow-right-short"></i>
+                    </a>
+                </div>
+
+                <!-- Form panel -->
+                <div class="col-lg-7 p-4 p-md-5 bg-white rounded-end">
+                    <h3 class="fw-semibold mb-4 text-center">CMCS Login</h3>
+
+                    <form asp-action="Login" method="post" novalidate>
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" asp-for="ReturnUrl" />
+
+                        <div class="mb-3">
+                            <label asp-for="Username" class="form-label">Username</label>
+                            <input asp-for="Username" class="form-control form-control-lg" placeholder="e.g. Lecturer" autocomplete="username" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Password" class="form-label">Password</label>
+                            <input asp-for="Password" type="password" class="form-control form-control-lg" placeholder="Same as username" autocomplete="current-password" />
+                            <div class="form-text">Demo tip: try <code>Lecturer</code> / same as username</div>
+                        </div>
+
+                        <div class="form-check mb-3">
+                            <input asp-for="RememberMe" class="form-check-input" id="remember" />
+                            <label class="form-check-label" for="remember">Remember me</label>
+                        </div>
+
+                        <button class="btn btn-primary btn-lg w-100 mb-2" type="submit">
+                            <i class="bi bi-box-arrow-in-right me-2"></i>Sign in
+                        </button>
+
+                        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary w-100">
+                            Back to Welcome
+                        </a>
+
+                        <!-- Validation / errors -->
+                        <div class="text-danger mt-3">
+                            @foreach (var err in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                            {
+                                <div>@err.ErrorMessage</div>
+                            }
+                        </div>
+                    </form>
+
+                    <p class="text-muted small mt-4 mb-0">
+                        Users: <strong>Lecturer</strong>, <strong>Programme Coordinator</strong>, <strong>Academic Manager</strong>
+                        (password equals username).
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

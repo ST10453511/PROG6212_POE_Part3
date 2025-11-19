@@ -1,0 +1,66 @@
+﻿@{
+    ViewData["Title"] = "Welcome to CMCS";
+}
+
+<section class="hero text-center">
+    <div class="container">
+        <h1 class="display-5 fw-bold mb-3">Welcome to the Contract Monthly Claim System</h1>
+        <p class="lead mb-4">
+            Submit, manage, and approve Independent Contractor claims securely and efficiently — built with ASP.NET Core MVC.
+        </p>
+
+        <div class="d-flex flex-wrap justify-content-center gap-3 mb-5">
+            <a asp-controller="Auth" asp-action="Login" class="btn btn-primary btn-hero">
+                <i class="bi bi-box-arrow-in-right me-2"></i>Login
+            </a>
+            <a asp-controller="Home" asp-action="About" class="btn btn-ghost btn-hero">
+                <i class="bi bi-info-circle me-2"></i>Learn more
+            </a>
+        </div>
+
+        <!-- quick confidence strip -->
+        <div class="d-flex flex-wrap justify-content-center gap-2">
+            <div class="stat-pill"><i class="bi bi-shield-check me-2"></i>Role-based access</div>
+            <div class="stat-pill"><i class="bi bi-cloud-arrow-up me-2"></i>Document uploads</div>
+            <div class="stat-pill"><i class="bi bi-activity me-2"></i>Live status tracking</div>
+        </div>
+    </div>
+</section>
+
+<div class="container py-5">
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card feature-card h-100">
+                <div class="card-body">
+                    <div class="feature-icon mb-3"><i class="bi bi-journal-check"></i></div>
+                    <h5 class="fw-semibold">Lecturers</h5>
+                    <p class="text-muted mb-0">
+                        Lecturers can seamlessly log their working hours for tasks such as lecturing, marking, consultation, and moderation. The system automatically calculates total claim values based on the hourly rate provided. Each submission allows for document uploads (like timesheets or proof of work), which are securely stored and accessible for review. Lecturers can also track the real time progress of each claim from submission to approval on an intuitive dashboard.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card feature-card h-100">
+                <div class="card-body">
+                    <div class="feature-icon success mb-3"><i class="bi bi-clipboard-check"></i></div>
+                    <h5 class="fw-semibold">Programme Coordinators</h5>
+                    <p class="text-muted mb-0">
+                        Programme Coordinators act as the first level of review for lecturer claims. They verify that submitted claims are accurate, complete, and aligned with departmental workload allocations. Coordinators can add comments or feedback to each claim, either requesting clarification or forwarding valid claims to Academic Managers for final approval.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card feature-card h-100">
+                <div class="card-body">
+                    <div class="feature-icon warning mb-3"><i class="bi bi-bar-chart-line"></i></div>
+                    <h5 class="fw-semibold">Academic Managers</h5>
+                    <p class="text-muted mb-0">
+                        Academic Managers oversee the final stage of the approval process. They review all claims that have passed through Programme Coordinators to ensure they meet institutional and budgetary requirements. Managers have access to detailed analytics, including claim trends, staff workload summaries, and approval statistics. This supports data driven decision making and efficient allocation of institutional resources.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

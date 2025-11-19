@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36616.10
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PROG6212_POE", "PROG6212_POE.csproj", "{AF2A63EA-E7A1-44BC-A1EC-465CF2385CCE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMCSTests", "..\CMCSTests\CMCSTests.csproj", "{02515D87-051D-4F1F-BC55-E2EBE1243B38}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AF2A63EA-E7A1-44BC-A1EC-465CF2385CCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF2A63EA-E7A1-44BC-A1EC-465CF2385CCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF2A63EA-E7A1-44BC-A1EC-465CF2385CCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF2A63EA-E7A1-44BC-A1EC-465CF2385CCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02515D87-051D-4F1F-BC55-E2EBE1243B38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02515D87-051D-4F1F-BC55-E2EBE1243B38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02515D87-051D-4F1F-BC55-E2EBE1243B38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02515D87-051D-4F1F-BC55-E2EBE1243B38}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8A277D5A-192C-43EE-BFEA-8F3B712E2A2B}
+	EndGlobalSection
+EndGlobal

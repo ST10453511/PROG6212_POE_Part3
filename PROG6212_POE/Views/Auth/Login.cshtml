@@ -16,14 +16,14 @@
 
                     <h2 class="text-white mb-3">Sign in</h2>
                     <p class="text-white-50 mb-4">
-                        Secure sign in for your role. For the demo environment,
-                        <span class="text-white">password = username</span>.
+                        Securely access your dashboard. Please sign in with your credentials to manage claims, approvals, and user profiles.
                     </p>
 
                     <div class="d-flex flex-wrap gap-2 mb-4">
                         <span class="role-chip">Lecturer</span>
                         <span class="role-chip">Programme Coordinator</span>
                         <span class="role-chip">Academic Manager</span>
+                        <span class="role-chip">HR/Admin</span>
                     </div>
 
                     <ul class="text-white-50 small list-unstyled mb-4">
@@ -47,13 +47,12 @@
 
                         <div class="mb-3">
                             <label asp-for="Username" class="form-label">Username</label>
-                            <input asp-for="Username" class="form-control form-control-lg" placeholder="e.g. Lecturer" autocomplete="username" />
+                            <input asp-for="Username" class="form-control form-control-lg" placeholder="Enter your username" autocomplete="username" />
                         </div>
 
                         <div class="mb-3">
                             <label asp-for="Password" class="form-label">Password</label>
-                            <input asp-for="Password" type="password" class="form-control form-control-lg" placeholder="Same as username" autocomplete="current-password" />
-                            <div class="form-text">Demo tip: try <code>Lecturer</code> / same as username</div>
+                            <input asp-for="Password" type="password" class="form-control form-control-lg" placeholder="Enter your password" autocomplete="current-password" />
                         </div>
 
                         <div class="form-check mb-3">
@@ -77,11 +76,6 @@
                             }
                         </div>
                     </form>
-
-                    <p class="text-muted small mt-4 mb-0">
-                        Users: <strong>Lecturer</strong>, <strong>Programme Coordinator</strong>, <strong>Academic Manager</strong>
-                        (password equals username).
-                    </p>
                 </div>
             </div>
         </div>

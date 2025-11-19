@@ -1,12 +1,37 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\Moegammad Yaaseen\\OneDrive\\Desktop\\Programming\\PROG6212_POE_Part3\\PROG6212_POE\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{AF2A63EA-E7A1-44BC-A1EC-465CF2385CCE}|PROG6212_POE.csproj|c:\\users\\moegammad yaaseen\\onedrive\\desktop\\programming\\prog6212_poe_part3\\prog6212_poe\\controllers\\hrcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF2A63EA-E7A1-44BC-A1EC-465CF2385CCE}|PROG6212_POE.csproj|solutionrelative:controllers\\hrcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 1,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedHeight": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "HRController.cs",
+              "DocumentMoniker": "C:\\Users\\Moegammad Yaaseen\\OneDrive\\Desktop\\Programming\\PROG6212_POE_Part3\\PROG6212_POE\\Controllers\\HRController.cs",
+              "RelativeDocumentMoniker": "Controllers\\HRController.cs",
+              "ToolTip": "C:\\Users\\Moegammad Yaaseen\\OneDrive\\Desktop\\Programming\\PROG6212_POE_Part3\\PROG6212_POE\\Controllers\\HRController.cs",
+              "RelativeToolTip": "Controllers\\HRController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-19T17:53:30.425Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

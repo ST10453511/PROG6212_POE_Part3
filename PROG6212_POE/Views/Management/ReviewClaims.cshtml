@@ -48,16 +48,21 @@
                                 <td>@c.TotalAmount.ToString("N2")</td>
 
                                 <td>
-                                    @if (!string.IsNullOrEmpty(c.DocumentPath))
+                                    @if (c.FileData != null && c.FileData.Length > 0)
                                     {
-                                        <a href="@c.DocumentPath" target="_blank" class="small"><i class="bi bi-paperclip"></i> View</a>
+                                        <a asp-controller="Dashboard"
+                                           asp-action="DownloadFile"
+                                           asp-route-id="@c.ClaimId"
+                                           class="btn btn-xs btn-outline-primary"
+                                           title="Download Document">
+                                            <i class="bi bi-download"></i> Download
+                                        </a>
                                     }
                                     else
                                     {
                                         <span class="text-muted small">None</span>
                                     }
                                 </td>
-
                                 <td>
                                     @if (c.Status == "UnderReview")
                                     {
@@ -65,7 +70,6 @@
                                     }
                                     else
                                     {
-
                                         <span class="badge bg-secondary">Submitted</span>
                                     }
                                 </td>

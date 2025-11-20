@@ -1,77 +1,77 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore; // Needed for database access
+using Microsoft.EntityFrameworkCore;
 using PROG6212_POE.Data;
 using PROG6212_POE.Models;
 using System;
+using System.IO;
 using System.Security.Claims;
+using System.Threading.Tasks;
+using System.Linq;
 
 namespace PROG6212_POE.Controllers
 {
-    [Authorize(Roles = "Lecturer")]
+    [Authorize]
     public class DashboardController : Controller
     {
         private readonly AppDbContext _context;
-        private readonly IFileStorage _fileStorage;
 
-        public DashboardController(AppDbContext context, IFileStorage fileStorage)
+        public DashboardController(AppDbContext context)
         {
             _context = context;
-            _fileStorage = fileStorage;
         }
 
-        // === DASHBOARD (List of Claims) ===
         public IActionResult Index()
         {
-            // Get the logged-in user's ID (which we stored as an Int in AuthController)
-            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            if (User.IsInRole("Programme Coordinator") || User.IsInRole("Academic Manager"))
+            {
+                return RedirectToAction("ReviewClaims", "Claims");
+            }
 
-            // Fetch claims from SQL Server
+            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
             var claims = _context.Claims
                 .Where(c => c.LecturerId == userId)
                 .OrderByDescending(c => c.SubmittedAt)
                 .ToList();
 
-            return View(claims); // Reuse the "Index" view (formerly MyClaims)
+            return View(claims);
         }
 
-        // === SUBMIT CLAIM (GET) ===
+        [Authorize(Roles = "Lecturer")]
         [HttpGet]
         public IActionResult SubmitClaim()
         {
-            // 1. Get the logged-in lecturer's ID
-            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-
-            // 2. Fetch their profile to get the HourlyRate (Automation!)
+            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
             var lecturer = _context.Users.Find(userId);
 
-            // 3. Pre-fill the form with their Rate
             var model = new PROG6212_POE.Models.Claim
             {
-                HourlyRate = lecturer?.HourlyRate ?? 0, // Pulls 500 from the DB
+                // We added '?' to handle if lecturer is null (just in case)
+                HourlyRate = lecturer?.HourlyRate ?? 0,
                 DateWorked = DateTime.Today,
                 HoursWorked = 0
             };
 
-            // 4. Send this non-null model to the View
             return View(model);
         }
 
-        // === SUBMIT CLAIM (POST) ===
+        [Authorize(Roles = "Lecturer")]
         [HttpPost]
-        // clearly tell it to use YOUR Claim model, not the Security one
         public async Task<IActionResult> SubmitClaim(PROG6212_POE.Models.Claim model, IFormFile? document)
         {
-            // 1. Get Current User
-            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
             var lecturer = _context.Users.Find(userId);
 
-            // 2. AUTOMATION: Pull the Hourly Rate from the Database (Requirement)
-            // The lecturer cannot edit this; we ignore whatever they sent in the form for 'Rate'
+            if (lecturer == null)
+            {
+                ModelState.AddModelError("", "Lecturer profile not found.");
+                return View(model);
+            }
+
             model.HourlyRate = lecturer.HourlyRate;
             model.LecturerId = userId;
 
-            // 3. AUTOMATION: Calculate Total
             try
             {
                 model.CalculateTotalAmount();
@@ -81,36 +81,24 @@ namespace PROG6212_POE.Controllers
                 ModelState.AddModelError("", ex.Message);
             }
 
-            // 4. VALIDATION: Business Rules
             if (model.HoursWorked > 24)
                 ModelState.AddModelError("HoursWorked", "You cannot claim more than 24 hours in a day.");
-
-            if (model.HoursWorked > 100) // Simple monthly cap example
-                ModelState.AddModelError("HoursWorked", "This exceeds the monthly limit of 100 hours.");
 
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            // 5. Handle File Upload
-            if (document != null)
+            if (document != null && document.Length > 0)
             {
-                try
+                using (var memoryStream = new MemoryStream())
                 {
-                    var fileData = await _fileStorage.SaveAsync(document);
-                    model.DocumentPath = fileData.RelativePath;
-                    model.DocumentName = fileData.FileName;
-                }
-                catch (Exception ex)
-                {
-                    // If file upload fails, show error and stop
-                    TempData["Error"] = $"File upload failed: {ex.Message}";
-                    return View(model);
+                    await document.CopyToAsync(memoryStream);
+                    model.FileData = memoryStream.ToArray();
+                    model.DocumentName = document.FileName;
                 }
             }
 
-            // 6. Save to SQL Database
             _context.Claims.Add(model);
             await _context.SaveChangesAsync();
 
@@ -118,11 +106,21 @@ namespace PROG6212_POE.Controllers
             return RedirectToAction("MyClaims");
         }
 
-        // === TRACKING API (For the Progress Bar) ===
+        public IActionResult DownloadFile(int id)
+        {
+            var claim = _context.Claims.Find(id);
+            if (claim == null || claim.FileData == null)
+            {
+                return NotFound("File not found in database.");
+            }
+
+            return File(claim.FileData, "application/octet-stream", claim.DocumentName ?? "document.pdf");
+        }
+
         [HttpGet]
         public IActionResult GetClaimStatus()
         {
-            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
 
             var data = _context.Claims
                 .Where(c => c.LecturerId == userId)
@@ -132,10 +130,10 @@ namespace PROG6212_POE.Controllers
             return Json(data);
         }
 
-        // === MY CLAIMS (The List View) ===
+        [Authorize(Roles = "Lecturer")]
         public IActionResult MyClaims()
         {
-            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
 
             var claims = _context.Claims
                 .Where(c => c.LecturerId == userId)

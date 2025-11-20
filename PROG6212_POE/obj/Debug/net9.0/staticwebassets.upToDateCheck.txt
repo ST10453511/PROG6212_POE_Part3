@@ -61,11 +61,11 @@ wwwroot\lib\jquery\dist\jquery.slim.js
 wwwroot\lib\jquery\dist\jquery.slim.min.js
 wwwroot\lib\jquery\dist\jquery.slim.min.map
 wwwroot\lib\jquery\LICENSE.txt
+wwwroot\uploads\398bd1b5-94ac-4aa6-8abd-623b683a0544.docx
 wwwroot\uploads\515fd48f-9b42-4d15-b88f-6183faaf067d.pdf
 wwwroot\uploads\78ec6416-284a-402d-8783-a13749d8e339.pdf
 wwwroot\uploads\b2b1eb16-9596-4b63-8559-db2da6e2f144.pdf
 wwwroot\uploads\b6652af3-d86e-44b1-92e0-5688cf1eef59.pdf
-wwwroot\uploads\398bd1b5-94ac-4aa6-8abd-623b683a0544.docx
 C:\Users\Moegammad Yaaseen\OneDrive\Desktop\Programming\PROG6212_POE_Part3\PROG6212_POE\wwwroot\js\site.js
 C:\Users\Moegammad Yaaseen\OneDrive\Desktop\Programming\PROG6212_POE_Part3\PROG6212_POE\wwwroot\lib\jquery\LICENSE.txt
 C:\Users\Moegammad Yaaseen\OneDrive\Desktop\Programming\PROG6212_POE_Part3\PROG6212_POE\wwwroot\lib\jquery\dist\jquery.slim.min.map
